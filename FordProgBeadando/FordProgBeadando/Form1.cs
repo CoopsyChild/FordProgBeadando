@@ -31,6 +31,45 @@ namespace FordProgBeadando
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             DialogResult result = openFileDialog1.ShowDialog();
+            string FilePath = openFileDialog1.FileName;
+            OpenTable(FilePath);
+        }
+
+        public void OpenTable(string FilePath)
+        {
+            try
+            {
+                string[] csv = System.IO.File.ReadAllLines(FilePath);
+                if (csv.Length > 0)
+                {
+                    //Első sor beolvasása az oszlopnevek létrehozásához
+                    string FirstLine = csv[0].Substring(1, csv[0].Length - 1);
+                    string[] ColumnNames = FirstLine.Split(';');
+                    foreach (string Column in ColumnNames)
+                    {
+                        dataGridView1.Columns.Add(Column, Column);
+                    }
+                    //Táblák feltöltése
+                    for (int i = 1; i < csv.Length; i++)
+                    {
+
+                        string[] Data = csv[i].Split(';');
+                        string[] row = new string[Data.Length];
+
+                        for (int j = 1; j < Data.Length; j++)
+                        {
+                            row[j - 1] = Data[j];
+                        }
+                        dataGridView1.Rows.Add(row);
+                        dataGridView1.Rows[i - 1].HeaderCell.Value = Data[0];
+                    }
+                }
+            }
+            catch
+            {
+                throw new Exception("A forrás fájl hibás");
+            }
+            
         }
     }
 }
