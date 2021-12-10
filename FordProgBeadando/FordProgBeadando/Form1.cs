@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -83,8 +84,34 @@ namespace FordProgBeadando
 
         private void dataGridView1_ColumnHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            string newColumnName = Interaction.InputBox("Kérlek írd be az új adatot:", "Title Change", "");
+            string newColumnName = Interaction.InputBox("Kérlek írd be az új adatot:", "Adatváltoztatás", "");
             dataGridView1.Columns[e.ColumnIndex].HeaderText = newColumnName;
+        }
+
+        private void dataGridView1_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            string newRowName = Interaction.InputBox("Kérlek írd be az új adatot:", "Adatváltoztatás", "");
+            dataGridView1.Rows[e.RowIndex].HeaderCell.Value = newRowName;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if(originalInput.Text.Length!=0)
+            {
+                if(originalInput.Text[originalInput.Text.Length-1]=='#')
+                {
+                    convertedInput.Text = Regex.Replace(originalInput.Text, "[0-9]+", "i");
+                }
+                else
+                {
+                    convertedInput.Text = Regex.Replace(originalInput.Text, "[0-9]+", "i") + "#";
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("Az input mező üres, kérlek add meg az input adatot!");
+            }
         }
     }
 }
