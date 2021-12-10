@@ -8,3 +8,13 @@ C:\Users\Coopsy\source\repos\FordProgBeadando\FordProgBeadando\bin\Debug\FordPro
 C:\Users\Coopsy\source\repos\FordProgBeadando\FordProgBeadando\bin\Debug\FordProgBeadando.pdb
 C:\Users\Coopsy\source\repos\FordProgBeadando\FordProgBeadando\obj\Debug\FordProgBeadando.exe
 C:\Users\Coopsy\source\repos\FordProgBeadando\FordProgBeadando\obj\Debug\FordProgBeadando.pdb
+C:\Users\Coopsy\Desktop\afprepo\FordProgBeadando\FordProgBeadando\FordProgBeadando\bin\Debug\FordProgBeadando.exe.config
+C:\Users\Coopsy\Desktop\afprepo\FordProgBeadando\FordProgBeadando\FordProgBeadando\bin\Debug\FordProgBeadando.exe
+C:\Users\Coopsy\Desktop\afprepo\FordProgBeadando\FordProgBeadando\FordProgBeadando\bin\Debug\FordProgBeadando.pdb
+C:\Users\Coopsy\Desktop\afprepo\FordProgBeadando\FordProgBeadando\FordProgBeadando\obj\Debug\FordProgBeadando.csproj.AssemblyReference.cache
+C:\Users\Coopsy\Desktop\afprepo\FordProgBeadando\FordProgBeadando\FordProgBeadando\obj\Debug\FordProgBeadando.Form1.resources
+C:\Users\Coopsy\Desktop\afprepo\FordProgBeadando\FordProgBeadando\FordProgBeadando\obj\Debug\FordProgBeadando.Properties.Resources.resources
+C:\Users\Coopsy\Desktop\afprepo\FordProgBeadando\FordProgBeadando\FordProgBeadando\obj\Debug\FordProgBeadando.csproj.GenerateResource.cache
+C:\Users\Coopsy\Desktop\afprepo\FordProgBeadando\FordProgBeadando\FordProgBeadando\obj\Debug\FordProgBeadando.csproj.CoreCompileInputs.cache
+C:\Users\Coopsy\Desktop\afprepo\FordProgBeadando\FordProgBeadando\FordProgBeadando\obj\Debug\FordProgBeadando.exe
+C:\Users\Coopsy\Desktop\afprepo\FordProgBeadando\FordProgBeadando\FordProgBeadando\obj\Debug\FordProgBeadando.pdb
