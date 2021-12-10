@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -39,6 +40,8 @@ namespace FordProgBeadando
         {
             try
             {
+                dataGridView1.Rows.Clear();
+                dataGridView1.Columns.Clear();
                 string[] csv = System.IO.File.ReadAllLines(FilePath);
                 if (csv.Length > 0)
                 {
@@ -64,12 +67,24 @@ namespace FordProgBeadando
                         dataGridView1.Rows[i - 1].HeaderCell.Value = Data[0];
                     }
                 }
+                dataGridView1.Columns.Cast<DataGridViewColumn>().ToList().ForEach(f => f.SortMode = DataGridViewColumnSortMode.NotSortable);
             }
             catch
             {
                 throw new Exception("A forrás fájl hibás");
             }
             
+        }
+
+        private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_ColumnHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            string newColumnName = Interaction.InputBox("Kérlek írd be az új adatot:", "Title Change", "");
+            dataGridView1.Columns[e.ColumnIndex].HeaderText = newColumnName;
         }
     }
 }
