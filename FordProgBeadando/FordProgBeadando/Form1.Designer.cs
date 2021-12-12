@@ -89,10 +89,11 @@ namespace FordProgBeadando
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 131);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(654, 345);
+            this.dataGridView1.Size = new System.Drawing.Size(654, 288);
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_ColumnHeaderMouseClick);
             this.dataGridView1.ColumnHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_ColumnHeaderMouseDoubleClick);
@@ -108,7 +109,7 @@ namespace FordProgBeadando
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(295, 482);
+            this.button3.Location = new System.Drawing.Point(295, 428);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 8;
@@ -120,7 +121,7 @@ namespace FordProgBeadando
             // 
             this.richTextBox1.Location = new System.Drawing.Point(672, 70);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(380, 435);
+            this.richTextBox1.Size = new System.Drawing.Size(380, 381);
             this.richTextBox1.TabIndex = 10;
             this.richTextBox1.Text = "";
             // 
@@ -132,12 +133,13 @@ namespace FordProgBeadando
             this.button4.TabIndex = 11;
             this.button4.Text = "Megoldás lépésről lépésre";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1064, 517);
+            this.ClientSize = new System.Drawing.Size(1064, 463);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button3);
