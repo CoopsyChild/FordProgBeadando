@@ -150,6 +150,7 @@ namespace FordProgBeadando
             this.Controls.Add(this.originalInput);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.Text = "Farkas Erik ford.Prog. Beadando";
             this.Load += new System.EventHandler(this.Form1_Load);

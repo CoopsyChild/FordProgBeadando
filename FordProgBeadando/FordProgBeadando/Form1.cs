@@ -74,7 +74,7 @@ namespace FordProgBeadando
             {
                 throw new Exception("A forrás fájl hibás");
             }
-            
+
         }
 
         public void ResizeDataGridView()
@@ -115,11 +115,11 @@ namespace FordProgBeadando
             dataGridView1.Rows[e.RowIndex].HeaderCell.Value = newRowName;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public string inputConvert()
         {
-            if(originalInput.Text.Length!=0)
+            if (originalInput.Text.Length != 0)
             {
-                if(originalInput.Text[originalInput.Text.Length-1]=='#')
+                if (originalInput.Text[originalInput.Text.Length - 1] == '#')
                 {
                     convertedInput.Text = Regex.Replace(originalInput.Text, "[0-9]+", "i");
                 }
@@ -127,95 +127,126 @@ namespace FordProgBeadando
                 {
                     convertedInput.Text = Regex.Replace(originalInput.Text, "[0-9]+", "i") + "#";
                 }
-                
+                return convertedInput.Text;
             }
             else
             {
                 MessageBox.Show("Az input mező üres, kérlek add meg az input adatot!");
+                return "empty";
             }
         }
-
+        private void button1_Click(object sender, EventArgs e)
+        {
+            inputConvert();
+        }
+        public bool checkDataGrid()
+        {
+            if(dataGridView1.RowCount == 0)
+            {
+                MessageBox.Show("A táblázat üres");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
         private void button4_Click(object sender, EventArgs e)
         {
-            stepByStepTextBox.Text = "";
-            List<String> RuleNumber = new List<string>();
-            string input = convertedInput.Text;
-            Stack<string> StepsStack= new Stack<string>();
-            StepsStack.Push("E");
-            int InputIndex = 0;
-            bool Stop = false;
-            // StatusTuple.Item1 = Input szalag fennmaradó része
-            // StatusTuple.Item2 = A verem aktuális tartalma
-            // StatusTuple.Item3 = Eddig alkalmazott szabályok sorozata
-            (string, string, string) StatusTuple=(input,"E", "emptylist");
-            stepByStepTextBox.AppendText(StatusTuple.Item1+","+StatusTuple.Item2 + "," + StatusTuple.Item3+ "\r\n");
-            StatusTuple.Item3 = "";
-
-
-            while (Stop == false)
+            string input = inputConvert();
+            bool IsEmpty = checkDataGrid();
+            if (input != "empty" && IsEmpty)
             {
-                string Step = StepsStack.Peek();
-                int ColumnIndex = GetColumnIndex(input[InputIndex]);
-                int RowIndex = GetRowIndex(Step);
-                StatusTuple.Item2 = String.Join("", StepsStack);
+                stepByStepTextBox.Text = "";
+                List<String> RuleNumber = new List<string>();
+                Stack<string> StepsStack = new Stack<string>();
+                StepsStack.Push("#");
+                StepsStack.Push("E");
+                int InputIndex = 0;
+                bool Stop = false;
+                // StatusTuple.Item1 = Input szalag fennmaradó része
+                // StatusTuple.Item2 = A verem aktuális tartalma
+                // StatusTuple.Item3 = Eddig alkalmazott szabályok sorozata
+                (string, string, string) StatusTuple = (input, "E", "emptylist");
+                stepByStepTextBox.AppendText(StatusTuple.Item1 + "," + StatusTuple.Item2 + "," + StatusTuple.Item3 + "\r\n");
+                StatusTuple.Item3 = "";
 
-                //Hiba ellenörzés
-                if (RowIndex==-1)
-                {
-                    MessageBox.Show("Hiba! A következő elem nem található az oszlopban: {0}", Step);
-                    break;
-                }
-                if(ColumnIndex==-1)
-                {
-                    MessageBox.Show("Hiba! Az oszlopnevek között nem szerepel az inputban található {0}. karakter", InputIndex.ToString());
-                    break;
-                }
 
-                string Rule = dataGridView1.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
-                //metszet = dataGridView1.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
-
-                if (Rule=="")
+                while (Stop == false)
                 {
-                    MessageBox.Show("Hiba! Az input helytelen");
-                    MessageBox.Show(String.Join("", StepsStack));
-                    Stop = true;
-                }
-                else if(Rule=="accept")
-                {
-                    Stop = true;
-                    MessageBox.Show("Az input helyes");
-                }
-                else if (Rule=="pop")
-                {
-                    StepsStack.Pop();
-                    StatusTuple.Item2=String.Join("", StepsStack);
-                    InputIndex++;
-                    StatusTuple.Item1 = StatusTuple.Item1.Substring(InputIndex);
-                    stepByStepTextBox.AppendText(StatusTuple.Item1 + "," + StatusTuple.Item2 + "," + StatusTuple.Item3 + "\r\n");
-                }
-                else
-                {
-                    StepsStack.Pop();
-                    Rule = Rule.Substring(1, Rule.Length - 2);
-                    string[] NextSteps = Rule.Split(',');                         
-                    for (int i = NextSteps[0].Length-1; i > -1; i--)
+                    string Step = StepsStack.Peek();
+                    int ColumnIndex = GetColumnIndex(input[InputIndex]);
+                    int RowIndex = GetRowIndex(Step);
+                    if (Step == "ε")
                     {
-                        if(i-1 > -1 && NextSteps[0][i].ToString()=="'")
+                        StepsStack.Pop();
+                        StatusTuple.Item2 = String.Join("", StepsStack);
+                        stepByStepTextBox.AppendText(StatusTuple.Item1 + "," + StatusTuple.Item2 + "," + StatusTuple.Item3 + "\r\n");
+                    }
+                    else
+                    {
+                        //Hiba ellenörzés
+                        if (RowIndex == -1)
                         {
-                            StepsStack.Push(NextSteps[0][i-1].ToString()+NextSteps[0][i].ToString());
-                            i--;
+                            MessageBox.Show("Hiba! Az elem nem található a sorok nevei között: " + Step, "Hiba");
+                            break;
                         }
-                        else 
-                        { 
-                            StepsStack.Push(NextSteps[0][i].ToString());
+                        if (ColumnIndex == -1)
+                        {
+                            MessageBox.Show("Hiba! Az oszlopnevek között nem szerepel az inputban található" + InputIndex.ToString() + "karakter", "Hiba");
+                            break;
+                        }
+
+                        string Rule = dataGridView1.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
+                        //metszet = dataGridView1.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
+
+                        if (Rule == "")
+                        {
+                            MessageBox.Show("Hiba! Az input helytelen");
+                            MessageBox.Show(String.Join("", StepsStack));
+                            Stop = true;
+                        }
+                        else if (Rule == "accept")
+                        {
+                            Stop = true;
+                            MessageBox.Show("Az input helyes");
+                        }
+                        else if (Rule == "pop")
+                        {
+                            StepsStack.Pop();
+                            StatusTuple.Item2 = String.Join("", StepsStack);
+                            InputIndex++;
+                            StatusTuple.Item1 = input.Substring(InputIndex);
+                            stepByStepTextBox.AppendText(StatusTuple.Item1 + "," + StatusTuple.Item2 + "," + StatusTuple.Item3 + "\r\n");
+                        }
+                        else
+                        {
+                            StepsStack.Pop();
+                            Rule = Rule.Substring(1, Rule.Length - 2);
+                            string[] NextSteps = Rule.Split(',');
+                            for (int i = NextSteps[0].Length - 1; i > -1; i--)
+                            {
+                                if (i - 1 > -1 && NextSteps[0][i].ToString() == "'")
+                                {
+                                    StepsStack.Push(NextSteps[0][i - 1].ToString() + NextSteps[0][i].ToString());
+                                    i--;
+                                }
+                                else
+                                {
+                                    StepsStack.Push(NextSteps[0][i].ToString());
+                                }
+                            }
+                            RuleNumber.Add(NextSteps[1]);
+                            StatusTuple.Item3 = StatusTuple.Item3 + NextSteps[1];
+                            if (StepsStack.Peek() != "ε")
+                            {
+                                StatusTuple.Item2 = String.Join("", StepsStack);
+                                stepByStepTextBox.AppendText(StatusTuple.Item1 + "," + StatusTuple.Item2 + "," + StatusTuple.Item3 + "\r\n");
+                            }
                         }
                     }
-                    StatusTuple.Item2 = String.Join("", StepsStack);
-                    RuleNumber.Add(NextSteps[1]);
-                    StatusTuple.Item3 = StatusTuple.Item3 + NextSteps[1];
-                    stepByStepTextBox.AppendText(StatusTuple.Item1 + "," + StatusTuple.Item2 + "," + StatusTuple.Item3 + "\r\n");
-                }
 
+                }
             }
 
         }
@@ -223,14 +254,13 @@ namespace FordProgBeadando
         public int GetRowIndex(string step)
         {
             int RowIndex = -1;
-            
-            for (int i = 0; i < dataGridView1.RowCount-1; i++)
+            for (int i = 0; i < dataGridView1.RowCount - 1; i++)
             {
                 string checkingString = dataGridView1.Rows[i].HeaderCell.Value.ToString();
-                if (step== checkingString)
+                if (step == checkingString)
                 {
                     RowIndex = i;
-                }    
+                }
             }
             return RowIndex;
         }
@@ -238,7 +268,7 @@ namespace FordProgBeadando
         public int GetColumnIndex(char step)
         {
             int ColumnIndex = -1;
-            for (int i = 0; i < dataGridView1.ColumnCount-1; i++)
+            for (int i = 0; i < dataGridView1.ColumnCount; i++)
             {
                 if (step.ToString() == dataGridView1.Columns[i].HeaderCell.Value.ToString())
                 {
