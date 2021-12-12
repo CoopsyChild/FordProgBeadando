@@ -153,21 +153,28 @@ namespace FordProgBeadando
         }
         private void button4_Click(object sender, EventArgs e)
         {
+            //input konvertálása
             string input = inputConvert();
+            //Táblázat ellenörzése
             bool IsEmpty = checkDataGrid();
+
+            // Megvizsgáljuk, hogy üres-e a Táblázat és az Input
             if (input != "empty" && IsEmpty)
             {
                 stepByStepTextBox.Text = "";
                 List<String> RuleNumber = new List<string>();
                 Stack<string> StepsStack = new Stack<string>();
+
+                //Kezdeti adatok felvétele a verembe
                 StepsStack.Push("#");
                 StepsStack.Push("E");
+
                 int InputIndex = 0;
                 bool Stop = false;
                 // StatusTuple.Item1 = Input szalag fennmaradó része
                 // StatusTuple.Item2 = A verem aktuális tartalma
                 // StatusTuple.Item3 = Eddig alkalmazott szabályok sorozata
-                (string, string, string) StatusTuple = (input, "E#", "emptylist");
+                (string, string, string) StatusTuple = (input, "E#", "");
                 stepByStepTextBox.AppendText(StatusTuple.Item1 + "," + StatusTuple.Item2 + "," + StatusTuple.Item3 + "\r\n");
                 StatusTuple.Item3 = "";
 
@@ -204,7 +211,6 @@ namespace FordProgBeadando
                         if (Rule == "")
                         {
                             MessageBox.Show("Hiba! Az input helytelen");
-                            MessageBox.Show(String.Join("", StepsStack));
                             Stop = true;
                         }
                         else if (Rule == "accept")
