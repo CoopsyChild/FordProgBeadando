@@ -167,7 +167,7 @@ namespace FordProgBeadando
                 // StatusTuple.Item1 = Input szalag fennmaradó része
                 // StatusTuple.Item2 = A verem aktuális tartalma
                 // StatusTuple.Item3 = Eddig alkalmazott szabályok sorozata
-                (string, string, string) StatusTuple = (input, "E", "emptylist");
+                (string, string, string) StatusTuple = (input, "E#", "emptylist");
                 stepByStepTextBox.AppendText(StatusTuple.Item1 + "," + StatusTuple.Item2 + "," + StatusTuple.Item3 + "\r\n");
                 StatusTuple.Item3 = "";
 
@@ -186,16 +186,17 @@ namespace FordProgBeadando
                     else
                     {
                         //Hiba ellenörzés
-                        if (RowIndex == -1)
-                        {
-                            MessageBox.Show("Hiba! Az elem nem található a sorok nevei között: " + Step, "Hiba");
-                            break;
-                        }
                         if (ColumnIndex == -1)
                         {
-                            MessageBox.Show("Hiba! Az oszlopnevek között nem szerepel az inputban található" + InputIndex.ToString() + "karakter", "Hiba");
+                            MessageBox.Show("Nem megfelelő input, hibás karakter a következő indexen: " + (InputIndex + 1), "Hiba");
                             break;
                         }
+                        if (RowIndex == -1)
+                        {
+                            MessageBox.Show("Hiba a sornevekben: A stackben található karakter nincs a sornevek között", "Hiba");  
+                            break;
+                        }
+                        
 
                         string Rule = dataGridView1.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
                         //metszet = dataGridView1.Rows[RowIndex].Cells[ColumnIndex].Value.ToString();
