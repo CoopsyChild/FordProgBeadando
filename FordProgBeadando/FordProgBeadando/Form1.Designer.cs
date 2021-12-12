@@ -37,7 +37,7 @@ namespace FordProgBeadando
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.stepByStepTextBox = new System.Windows.Forms.RichTextBox();
             this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -117,13 +117,13 @@ namespace FordProgBeadando
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // richTextBox1
+            // stepByStepTextBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(672, 70);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(380, 381);
-            this.richTextBox1.TabIndex = 10;
-            this.richTextBox1.Text = "";
+            this.stepByStepTextBox.Location = new System.Drawing.Point(672, 70);
+            this.stepByStepTextBox.Name = "stepByStepTextBox";
+            this.stepByStepTextBox.Size = new System.Drawing.Size(380, 381);
+            this.stepByStepTextBox.TabIndex = 10;
+            this.stepByStepTextBox.Text = "";
             // 
             // button4
             // 
@@ -141,7 +141,7 @@ namespace FordProgBeadando
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1064, 463);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.stepByStepTextBox);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dataGridView1);
@@ -169,7 +169,7 @@ namespace FordProgBeadando
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox stepByStepTextBox;
         private System.Windows.Forms.Button button4;
     }
 }
